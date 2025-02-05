@@ -11,7 +11,8 @@ const generateToken = (id) => {
 // Signup API
 const signup = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
+  console.log("Singup API invoked");
+  console.log(email, " ", password);
 
   try {
     let user = await User.findOne({ email });
@@ -32,18 +33,28 @@ const signup = async (req, res) => {
 // Login API
 const login = async (req, res) => {
   const { email, password } = req.body;
+  console.log("Login API invoked");
+  console.log(email, " ", password);
 
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ message: "Invalid credentials" });
+    if (!user) {
+      console.log("Invalid Creds");
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
 
     const isMatch = await user.matchPassword(password);
-    if (!isMatch)
+    if (!isMatch) {
+      console.log("Invalid Creds");
       return res.status(401).json({ message: "Invalid credentials" });
+    }
 
     const token = generateToken(user._id);
+    console.log("Logged in successfully!");
+
     res.json({ token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
