@@ -1,13 +1,18 @@
 const serverless = require("serverless-http");
 const express = require("express");
+const authRoutes = require("./src/routes/authRouter");
+require("./db");
+
 const app = express();
 
+app.use("/api/auth", authRoutes);
+
 app.get("/", (req, res, next) => {
-  return res.status(200).send("Hello World!")
+  return res.status(200).send("Hello World!");
 });
 
 app.get("/hello", (req, res, next) => {
-  return res.status(200).send("SukDik")
+  return res.status(200).send("New Route");
 });
 
 app.use((req, res, next) => {

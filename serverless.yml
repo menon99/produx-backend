@@ -7,6 +7,11 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: ap-south-1
+  environment:
+    MONGO_USERNAME: ${env:MONGO_USERNAME}
+    MONGO_PASSWORD: ${env:MONGO_PASSWORD}
+    MONGO_DB: ${env:MONGO_DB}
+    JWT_SECRET: ${env:JWT_SECRET}
 
 functions:
   api:
