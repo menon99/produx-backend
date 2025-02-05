@@ -6,7 +6,6 @@ const password = process.env.MONGO_PASSWORD;
 const dbName = process.env.MONGO_DB;
 
 const uri = `mongodb+srv://${username}:${password}@cluster0.ne5ud.mongodb.net/${dbName}/?retryWrites=true&w=majority`;
-console.log(uri);
 
 mongoose
   .connect(uri)

@@ -11,6 +11,7 @@ const generateToken = (id) => {
 // Signup API
 const signup = async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
 
   try {
     let user = await User.findOne({ email });
@@ -19,8 +20,11 @@ const signup = async (req, res) => {
     user = new User({ email, password });
     await user.save();
 
+    console.log("User Registered");
+
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
