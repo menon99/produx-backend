@@ -10,6 +10,7 @@ const registerForWorkshop = async (req, res) => {
     name,
     registrationNumber,
     officialMail,
+    mobileNumber,
     priorExperience,
     workshopType,
   } = req.body;
@@ -46,6 +47,7 @@ const registerForWorkshop = async (req, res) => {
       name,
       registrationNumber,
       officialMail,
+      mobileNumber,
       priorExperience,
       workshopType,
     });

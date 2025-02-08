@@ -25,6 +25,15 @@ const workshopSchema = Joi.object({
     .required()
     .messages({
       "string.pattern.base": "Email must belong to iimshillong.ac.in domain",
+      "string.empty": "Email is required",
+    }),
+
+  mobileNumber: Joi.string()
+    .pattern(/^\+91[0-9]{10}$/)
+    .required()
+    .messages({
+      "string.pattern.base": "Mobile number must be in format +91XXXXXXXXXX",
+      "string.empty": "Mobile number is required",
     }),
 
   priorExperience: Joi.string()
@@ -45,10 +54,10 @@ const workshopSchema = Joi.object({
 
 const errorCodes = {
   "string.empty": "FIELD_REQUIRED",
+  "string.pattern.base": "INVALID_MOBILE_FORMAT",
+  "string.email": "INVALID_EMAIL_FORMAT",
   "string.min": "FIELD_TOO_SHORT",
   "string.max": "FIELD_TOO_LONG",
-  "string.alphanum": "FIELD_INVALID_FORMAT",
-  "string.pattern.base": "INVALID_EMAIL_DOMAIN",
   "any.only": "INVALID_VALUE",
 };
 
