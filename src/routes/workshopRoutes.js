@@ -3,7 +3,10 @@ const { protect } = require("../middleware/authMiddleware");
 const {
   validateWorkshopRegistration,
 } = require("../middleware/validateWorkshop");
-const { registerForWorkshop } = require("../controllers/workshopController");
+const {
+  registerForWorkshop,
+  getSeatsLeft,
+} = require("../controllers/workshopController");
 
 const router = express.Router();
 
@@ -13,5 +16,6 @@ router.post(
   validateWorkshopRegistration,
   registerForWorkshop
 );
+router.get("/seats", getSeatsLeft);
 
 module.exports = router;

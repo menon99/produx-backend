@@ -66,4 +66,37 @@ const registerForWorkshop = async (req, res) => {
   }
 };
 
-module.exports = { registerForWorkshop };
+const getSeatsLeft = async (req, res) => {
+  try {
+    // Count the number of registrations for each workshop
+    const googleAnalyticsCount = await WorkshopRegistration.countDocuments({
+      workshopType: "google_analytics",
+    });
+    const figmaCount = await WorkshopRegistration.countDocuments({
+      workshopType: "figma",
+    });
+
+    // Calculate the remaining seats
+    const googleAnalyticsSeatsLeft =
+      SEAT_LIMITS.google_analytics - googleAnalyticsCount;
+    const figmaSeatsLeft = SEAT_LIMITS.figma - figmaCount;
+
+    // Return the response with the seats left
+    res.json({
+      code: "SEATS_STATUS",
+      message: "Number of seats left for each workshop",
+      data: {
+        google_analytics: googleAnalyticsSeatsLeft,
+        figma: figmaSeatsLeft,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Error fetching seat availability",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { registerForWorkshop, getSeatsLeft };
