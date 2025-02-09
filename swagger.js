@@ -8,7 +8,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "https://krchisud2l.execute-api.ap-south-1.amazonaws.com/api",
+        url: "https://krchisud2l.execute-api.ap-south-1.amazonaws.com/api/docs",
         description: "Local Development Server",
       },
     ],
