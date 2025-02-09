@@ -110,4 +110,37 @@ const getSeatsLeft = async (req, res) => {
   }
 };
 
-module.exports = { registerForWorkshop, getSeatsLeft };
+const getRegistrationStatus = async (req, res) => {
+  const userId = req.user;
+
+  try {
+    // Check if the user is registered for Google Analytics workshop
+    const googleAnalyticsRegistration = await WorkshopRegistration.findOne({
+      user: userId,
+      workshopType: "google_analytics",
+    });
+
+    // Check if the user is registered for Figma workshop
+    const figmaRegistration = await WorkshopRegistration.findOne({
+      user: userId,
+      workshopType: "figma",
+    });
+
+    return res.json({
+      code: "REGISTRATION_STATUS",
+      message: "Workshop registration status retrieved successfully",
+      data: {
+        google_analytics: !!googleAnalyticsRegistration,
+        figma: !!figmaRegistration,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Error fetching registration status",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { registerForWorkshop, getSeatsLeft, getRegistrationStatus };
