@@ -1,4 +1,5 @@
 const WorkshopRegistration = require("../models/WorkshopRegistration");
+const Student = require("../models/Student");
 
 const SEAT_LIMITS = {
   google_analytics: 50,
@@ -14,19 +15,32 @@ const registerForWorkshop = async (req, res) => {
     priorExperience,
     workshopType,
   } = req.body;
-  const userId = req.user; // Retrieved from JWT middleware
-
+  const userId = req.user;
   try {
-    // Check if the user is already registered
-    const existingRegistration = await WorkshopRegistration.findOne({
-      user: userId,
-      workshopType,
-    });
-    if (existingRegistration) {
-      return res.status(400).json({
-        code: "USER_ALREADY_REGISTERED",
-        message: "You are already registered for this workshop.",
+    let student = await Student.findOne({ registrationNumber });
+
+    // If the student already exists, check for existing registration
+    if (student) {
+      const existingRegistration = await WorkshopRegistration.findOne({
+        student: student._id,
+        workshopType,
       });
+      if (existingRegistration) {
+        return res.status(400).json({
+          code: "USER_ALREADY_REGISTERED",
+          message: "You are already registered for this workshop.",
+        });
+      }
+    } else {
+      // If student doesn't exist, create a new entry
+      student = new Student({
+        name,
+        registrationNumber,
+        officialMail,
+        mobileNumber,
+      });
+
+      await student.save();
     }
 
     // Check if seats are available
@@ -41,13 +55,10 @@ const registerForWorkshop = async (req, res) => {
       });
     }
 
-    // Create a new registration
+    // Create a new Workshop Registration with a reference to the student
     const newRegistration = new WorkshopRegistration({
+      student: student._id,
       user: userId,
-      name,
-      registrationNumber,
-      officialMail,
-      mobileNumber,
       priorExperience,
       workshopType,
     });

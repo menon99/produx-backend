@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 
 const WorkshopRegistrationSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  name: { type: String, required: true },
-  registrationNumber: { type: String, required: true },
-  officialMail: { type: String, required: true },
-  mobileNumber: { type: String, required: true },
+  student: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Student",
+    required: true,
+  },
   priorExperience: {
     type: String,
     enum: ["Beginner", "Intermediate", "Advanced", "Refresher"],
