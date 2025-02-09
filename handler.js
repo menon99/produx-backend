@@ -8,6 +8,7 @@ const swaggerOptions = require("./swagger");
 const authRoutes = require("./src/routes/authRouter");
 const workshopRoutes = require("./src/routes/workshopRoutes");
 const treasureHuntRoutes = require("./src/routes/treasureHuntRoutes");
+const webinarRoutes = require("./src/routes/webinarRoutes");
 
 require("./db");
 
@@ -23,6 +24,7 @@ app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/auth", authRoutes);
 app.use("/api/workshop", workshopRoutes);
 app.use("/api/treasurehunt", treasureHuntRoutes);
+app.use("/api/webinar", webinarRoutes);
 
 // Default not found route
 app.use((req, res) => {
