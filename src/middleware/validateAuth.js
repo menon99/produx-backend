@@ -1,30 +1,4 @@
-const Joi = require("joi");
-
-// Signup Schema
-const signupSchema = Joi.object({
-  email: Joi.string().email().required().messages({
-    "string.empty": "Email is required",
-    "string.email": "Invalid email format",
-  }),
-
-  password: Joi.string().min(8).max(30).required().messages({
-    "string.empty": "Password is required",
-    "string.min": "Password must be at least 8 characters",
-    "string.max": "Password must be at most 30 characters",
-  }),
-});
-
-// Login Schema
-const loginSchema = Joi.object({
-  email: Joi.string().email().required().messages({
-    "string.empty": "Email is required",
-    "string.email": "Invalid email format",
-  }),
-
-  password: Joi.string().required().messages({
-    "string.empty": "Password is required",
-  }),
-});
+const userSchema = require("../validation/Schemas/User");
 
 // Error Codes Mapping
 const errorCodes = {
@@ -36,7 +10,7 @@ const errorCodes = {
 
 // Middleware Function for Signup Validation
 const validateSignup = (req, res, next) => {
-  const { error } = signupSchema.validate(req.body, { abortEarly: false });
+  const { error } = userSchema.validate(req.body, { abortEarly: false });
 
   if (error) {
     return res.status(400).json({
@@ -55,7 +29,7 @@ const validateSignup = (req, res, next) => {
 
 // Middleware Function for Login Validation
 const validateLogin = (req, res, next) => {
-  const { error } = loginSchema.validate(req.body, { abortEarly: false });
+  const { error } = userSchema.validate(req.body, { abortEarly: false });
 
   if (error) {
     return res.status(400).json({
