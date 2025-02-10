@@ -1,5 +1,6 @@
 const serverless = require("serverless-http");
 const express = require("express");
+const cors = require("cors");
 
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
@@ -12,8 +13,24 @@ const webinarRoutes = require("./src/routes/webinarRoutes");
 
 require("./db");
 
+// Allowed domains
+const allowedOrigins = ["http://localhost:5173", "https://produx.bitesys.org"];
+
+// CORS Configuration
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // Allow cookies and auth headers
+};
+
 // Initialise express app
 const app = express();
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Add swagger docs
