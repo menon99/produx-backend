@@ -26,6 +26,11 @@ app.use("/api/workshop", workshopRoutes);
 app.use("/api/treasurehunt", treasureHuntRoutes);
 app.use("/api/webinar", webinarRoutes);
 
+// Add Health API
+app.get("/health", (req, res) => {
+  return res.status(200).send("AoK");
+});
+
 // Default not found route
 app.use((req, res) => {
   return res.status(404).json({
