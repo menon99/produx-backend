@@ -73,4 +73,42 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+const refreshToken = async (req, res) => {
+  const { token } = req.body;
+
+  if (!token) {
+    return res
+      .status(400)
+      .json({ code: "TOKEN_REQUIRED", message: "Token is required." });
+  }
+
+  try {
+    // Decode the expired token without verifying expiration
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, {
+      ignoreExpiration: true,
+    });
+
+    // Check if the user exists
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ code: "USER_NOT_FOUND", message: "User not found." });
+    }
+
+    // Generate a new valid JWT token
+    const newToken = generateToken(user._id);
+
+    res.status(200).json({
+      code: "TOKEN_REFRESHED",
+      message: "New token generated successfully.",
+      token: newToken,
+    });
+  } catch (error) {
+    return res
+      .status(401)
+      .json({ code: "INVALID_TOKEN", message: "Invalid or tampered token." });
+  }
+};
+
+module.exports = { signup, login, refreshToken };

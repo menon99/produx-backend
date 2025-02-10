@@ -1,5 +1,5 @@
 const express = require("express");
-const { signup, login } = require("../controllers/authController");
+const { signup, login, refreshToken } = require("../controllers/authController");
 const { validateSignup, validateLogin } = require("../middleware/validateAuth");
 
 const router = express.Router();
@@ -67,5 +67,32 @@ router.post("/signup", validateSignup, signup);
  *         description: Internal server error
  */
 router.post("/login", validateLogin, login);
+
+/**
+ * @swagger
+ * /auth/refresh-token:
+ *   post:
+ *     summary: Generate a new access token from an expired token
+ *     description: Verifies the expired token and issues a new valid access token.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               expiredToken:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: New token generated successfully
+ *       400:
+ *         description: Token is required
+ *       401:
+ *         description: Invalid or tampered token
+ *       404:
+ *         description: User not found
+ */
+router.post("/refresh", refreshToken);
 
 module.exports = router;
