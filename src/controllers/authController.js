@@ -16,17 +16,24 @@ const signup = async (req, res) => {
 
   try {
     let user = await User.findOne({ email });
-    if (user) return res.status(400).json({ message: "User already exists" });
+    if (user)
+      return res
+        .status(400)
+        .json({ code: "USER_EXISTS", message: "User already exists" });
 
     user = new User({ email, password });
     await user.save();
 
     console.log("User Registered");
+    const token = generateToken(user._id);
 
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ code: "USER_CREATED", token });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Internal server error",
+    });
   }
 };
 
@@ -40,22 +47,29 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       console.log("Invalid Creds");
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res
+        .status(401)
+        .json({ code: "INVALID_CREDENTIALS", message: "Invalid credentials" });
     }
 
     const isMatch = await user.matchPassword(password);
     if (!isMatch) {
       console.log("Invalid Creds");
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res
+        .status(401)
+        .json({ code: "INVALID_CREDENTIALS", message: "Invalid credentials" });
     }
 
     const token = generateToken(user._id);
     console.log("Logged in successfully!");
 
-    res.json({ token });
+    res.json({ code: "LOGGED_IN", token });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Internal server error",
+    });
   }
 };
 
