@@ -48,7 +48,7 @@ const WebinarRegistrationSchema = new mongoose.Schema({
     default: null,
     trim: true,
     maxlength: 150,
-    minlength: 3,
+    minlength: 0,
   },
   createdAt: { type: Date, default: Date.now },
 });

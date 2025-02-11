@@ -19,7 +19,7 @@ const webinarSchema = Joi.object({
       "string.pattern.base":
         "Invalid WhatsApp number format. Use +91XXXXXXXXXX.",
     }),
-  questionForSpeaker: Joi.string().trim().min(3).max(150).allow(null, ""),
+  questionForSpeaker: Joi.string().trim().min(0).max(150).allow(null, ""),
 });
 
 module.exports = webinarSchema;
