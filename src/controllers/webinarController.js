@@ -23,6 +23,16 @@ const registerForWebinar = async (req, res) => {
       });
     }
 
+    const existingUserRegistration = await WebinarRegistration.findOne({
+      user: userId,
+    });
+    if (existingUserRegistration) {
+      return res.status(400).json({
+        code: "ALREADY_REGISTERED",
+        message: "You have already registered for the webinar.",
+      });
+    }
+
     // Create a new webinar registration
     const newRegistration = new WebinarRegistration({
       user: userId,

@@ -15,11 +15,22 @@ const registerForWorkshop = async (req, res) => {
 
     // If the student already exists, check for existing registration
     if (student) {
-      const existingRegistration = await WorkshopRegistration.findOne({
+      const existingStudentRegistration = await WorkshopRegistration.findOne({
         student: student._id,
         workshopType,
       });
-      if (existingRegistration) {
+      if (existingStudentRegistration) {
+        return res.status(400).json({
+          code: "USER_ALREADY_REGISTERED",
+          message: "You are already registered for this workshop.",
+        });
+      }
+
+      const existingUserRegistration = await WorkshopRegistration.findOne({
+        user: userId,
+        workshopType,
+      });
+      if (existingUserRegistration) {
         return res.status(400).json({
           code: "USER_ALREADY_REGISTERED",
           message: "You are already registered for this workshop.",
