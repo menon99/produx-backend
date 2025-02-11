@@ -7,14 +7,8 @@ const SEAT_LIMITS = {
 };
 
 const registerForWorkshop = async (req, res) => {
-  const {
-    name,
-    registrationNumber,
-    officialMail,
-    mobileNumber,
-    priorExperience,
-    workshopType,
-  } = req.body;
+  const { student, priorExperience, workshopType } = req.body;
+  const { name, registrationNumber, officialMail, mobileNumber } = student;
   const userId = req.user;
   try {
     let student = await Student.findOne({ registrationNumber });
