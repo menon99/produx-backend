@@ -2,7 +2,7 @@ const Joi = require("joi");
 const studentSchema = require("./Student");
 
 const workshopSchema = Joi.object({
-  student: studentSchema,
+  ...studentSchema,
   priorExperience: Joi.string()
     .valid("Beginner", "Intermediate", "Advanced", "Refresher")
     .required()
