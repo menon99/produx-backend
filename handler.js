@@ -10,6 +10,7 @@ const authRoutes = require("./src/routes/authRouter");
 const workshopRoutes = require("./src/routes/workshopRoutes");
 const treasureHuntRoutes = require("./src/routes/treasureHuntRoutes");
 const webinarRoutes = require("./src/routes/webinarRoutes");
+const ventureClashRoutes = require("./src/routes/ventureClashRoutes");
 
 require("./db");
 
@@ -42,6 +43,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/workshop", workshopRoutes);
 app.use("/api/treasurehunt", treasureHuntRoutes);
 app.use("/api/webinar", webinarRoutes);
+app.use("/api/ventureclash", ventureClashRoutes);
 
 // Add Health API
 app.get("/health", (req, res) => {
