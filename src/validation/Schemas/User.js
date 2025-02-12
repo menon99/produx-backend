@@ -1,10 +1,13 @@
 const Joi = require("joi");
 
 const userSchema = Joi.object({
-  email: Joi.string().email().required().messages({
-    "string.empty": "Email is required",
-    "string.email": "Invalid email format",
-  }),
+  email: Joi.string()
+    .pattern(/^[a-zA-Z0-9._%+-]+@iimshillong\.ac\.in$/)
+    .required()
+    .messages({
+      "string.pattern.base": "Email must belong to iimshillong.ac.in domain",
+      "string.empty": "Email is required",
+    }),
 
   password: Joi.string().min(8).max(30).required().messages({
     "string.empty": "Password is required",
