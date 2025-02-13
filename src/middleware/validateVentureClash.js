@@ -8,7 +8,7 @@ const validateVentureClashRegistration = (req, res, next) => {
   if (error) {
     return res.status(400).json({
       code: "VALIDATION_ERROR",
-      message: "Invalid request data",
+      message: `Validation error: ${err.message}`,
       errors: error.details.map((err) => err.message),
     });
   }

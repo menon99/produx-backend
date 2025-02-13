@@ -15,7 +15,7 @@ const validateWorkshopRegistration = (req, res, next) => {
   if (error) {
     return res.status(400).json({
       code: "VALIDATION_FAILED",
-      message: "Validation error",
+      message: `Validation error: ${err.message}`,
       errors: error.details.map((err) => ({
         field: err.path[0],
         message: err.message,
