@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const WebinarRegistrationSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   fullName: {
     type: String,
     required: true,

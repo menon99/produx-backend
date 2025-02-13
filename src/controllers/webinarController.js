@@ -11,7 +11,6 @@ const registerForWebinar = async (req, res) => {
     mobileNumber,
     questionForSpeaker,
   } = req.body;
-  const userId = req.user; // Extracted from JWT middleware
 
   try {
     // Check if the user has already registered using the same email
@@ -20,16 +19,6 @@ const registerForWebinar = async (req, res) => {
       return res.status(400).json({
         code: "ALREADY_REGISTERED",
         message: "You have already registered for the webinar with this email.",
-      });
-    }
-
-    const existingUserRegistration = await WebinarRegistration.findOne({
-      user: userId,
-    });
-    if (existingUserRegistration) {
-      return res.status(400).json({
-        code: "ALREADY_REGISTERED",
-        message: "You have already registered for the webinar.",
       });
     }
 
