@@ -1,6 +1,5 @@
 const express = require("express");
 const { registerForWebinar } = require("../controllers/webinarController");
-const { protect } = require("../middleware/authMiddleware");
 const {
   validateWebinarRegistration,
 } = require("../middleware/validateWebinar");
@@ -60,11 +59,6 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.post(
-  "/register",
-  protect,
-  validateWebinarRegistration,
-  registerForWebinar
-);
+router.post("/register", validateWebinarRegistration, registerForWebinar);
 
 module.exports = router;
