@@ -34,8 +34,7 @@ const memberSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minlength: 3,
-    maxlength: 100,
+    length: 3,
   },
   pincode: {
     type: String,

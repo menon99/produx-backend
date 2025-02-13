@@ -17,16 +17,16 @@ const memberSchema = Joi.object({
     }),
   profession: Joi.string().valid("Student", "Working Professional").required(),
   city: Joi.string().trim().min(3).max(100).required(),
-  state: Joi.string().trim().min(3).max(100).required(),
+  state: Joi.string().trim().length(2).required(),
   pincode: Joi.string()
     .trim()
     .length(6)
     .required()
     .pattern(/^\d{6}$/),
-  collegeName: Joi.string().trim().min(3).max(100),
-  collegeLocation: Joi.string().trim().min(3).max(100),
-  companyName: Joi.string().trim().min(3).max(100),
-  companyLocation: Joi.string().trim().min(3).max(100),
+  collegeName: Joi.string().trim().min(3).max(100).optional(),
+  collegeLocation: Joi.string().trim().min(3).max(100).optional(),
+  companyName: Joi.string().trim().min(3).max(100).optional(),
+  companyLocation: Joi.string().trim().min(3).max(100).optional(),
 });
 
 const ventureClashSchema = Joi.object({
