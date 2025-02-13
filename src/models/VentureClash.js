@@ -8,7 +8,7 @@ const memberSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 100,
   },
-  email: { type: String, required: true, trim: true, unique: true },
+  email: { type: String, required: true, trim: true },
   mobileNumber: {
     type: String,
     required: true,
