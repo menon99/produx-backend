@@ -24,7 +24,6 @@ const registerForWebinar = async (req, res) => {
 
     // Create a new webinar registration
     const newRegistration = new WebinarRegistration({
-      user: userId,
       fullName,
       profession,
       yearsOfExperience,
