@@ -42,10 +42,10 @@ const memberSchema = new mongoose.Schema({
     trim: true,
     match: [/^\d{6}$/, "Invalid pincode format."],
   },
-  collegeName: { type: String, trim: true, minlength: 3, maxlength: 100 },
-  collegeLocation: { type: String, trim: true, minlength: 3, maxlength: 100 },
-  companyName: { type: String, trim: true, minlength: 3, maxlength: 100 },
-  companyLocation: { type: String, trim: true, minlength: 3, maxlength: 100 },
+  collegeName: { type: String, trim: true, maxlength: 100 },
+  collegeLocation: { type: String, trim: true, maxlength: 100 },
+  companyName: { type: String, trim: true, maxlength: 100 },
+  companyLocation: { type: String, trim: true, maxlength: 100 },
 });
 
 const ventureClashSchema = new mongoose.Schema(
