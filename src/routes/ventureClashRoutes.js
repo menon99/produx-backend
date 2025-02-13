@@ -92,7 +92,7 @@ const router = express.Router();
  *           pattern: '^\d{6}$'
  */
 router.post(
-  "/registerVentureClash",
+  "/register",
   validateVentureClashRegistration,
   registerVentureClash
 );
