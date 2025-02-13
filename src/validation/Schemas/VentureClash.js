@@ -23,10 +23,10 @@ const memberSchema = Joi.object({
     .length(6)
     .required()
     .pattern(/^\d{6}$/),
-  collegeName: Joi.string().trim().min(3).max(100).optional(),
-  collegeLocation: Joi.string().trim().min(3).max(100).optional(),
-  companyName: Joi.string().trim().min(3).max(100).optional(),
-  companyLocation: Joi.string().trim().min(3).max(100).optional(),
+  collegeName: Joi.string().trim().max(100).optional(),
+  collegeLocation: Joi.string().trim().max(100).optional(),
+  companyName: Joi.string().trim().max(100).optional(),
+  companyLocation: Joi.string().trim().max(100).optional(),
 });
 
 const ventureClashSchema = Joi.object({
