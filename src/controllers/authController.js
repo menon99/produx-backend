@@ -30,6 +30,7 @@ const signup = async (req, res) => {
     res.status(201).json({ code: "USER_CREATED", token });
   } catch (error) {
     console.log(error);
+    console.log(req.body);
     res.status(500).json({
       code: "INTERNAL_SERVER_ERROR",
       message: "Internal server error",
@@ -65,6 +66,7 @@ const login = async (req, res) => {
 
     res.json({ code: "LOGGED_IN", token });
   } catch (error) {
+    console.log(req.body);
     console.log(error);
     res.status(500).json({
       code: "INTERNAL_SERVER_ERROR",

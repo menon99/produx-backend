@@ -53,6 +53,8 @@ const registerForWebinar = async (req, res) => {
       message: "Successfully registered for the webinar!",
     });
   } catch (error) {
+    console.log(error);
+    console.log(req.body);
     return res.status(500).json({
       code: "INTERNAL_SERVER_ERROR",
       message: "Internal server error",

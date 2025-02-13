@@ -68,6 +68,7 @@ exports.registerVentureClash = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
+    console.log(req.body);
     res
       .status(500)
       .json({

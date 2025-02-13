@@ -83,6 +83,7 @@ const registerTreasureHuntTeam = async (req, res) => {
       message: "Team successfully registered for the Treasure Hunt!",
     });
   } catch (error) {
+    console.log(req.body);
     return res.status(500).json({
       code: "INTERNAL_SERVER_ERROR",
       message: "Internal server error",

@@ -74,6 +74,8 @@ const registerForWorkshop = async (req, res) => {
       message: "Successfully registered for the workshop!",
     });
   } catch (error) {
+    console.log(error);
+    console.log(req.body);
     return res.status(500).json({
       code: "INTERNAL_SERVER_ERROR",
       message: "Internal server error",
@@ -107,6 +109,7 @@ const getSeatsLeft = async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       code: "INTERNAL_SERVER_ERROR",
       message: "Error fetching seat availability",
@@ -140,6 +143,7 @@ const getRegistrationStatus = async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       code: "INTERNAL_SERVER_ERROR",
       message: "Error fetching registration status",
