@@ -1,7 +1,6 @@
 const Joi = require("joi");
-const studentSchema = require("./Student");
 
-const treasureHuntSchema = Joi.object({
+const quizSchema = Joi.object({
   teamName: Joi.string().trim().min(2).max(100).required(),
   leaderName: Joi.string().trim().min(2).max(100).required(),
   leaderRegistrationNumber: Joi.string()
@@ -28,4 +27,4 @@ const treasureHuntSchema = Joi.object({
   member4Name: Joi.string().trim().min(2).max(100).required(),
 });
 
-module.exports = treasureHuntSchema;
+module.exports = quizSchema;

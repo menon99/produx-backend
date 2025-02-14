@@ -8,7 +8,7 @@ const swaggerOptions = require("./swagger");
 
 const authRoutes = require("./src/routes/authRouter");
 const workshopRoutes = require("./src/routes/workshopRoutes");
-const treasureHuntRoutes = require("./src/routes/treasureHuntRoutes");
+const quizRoutes = require("./src/routes/quizRoutes");
 const webinarRoutes = require("./src/routes/webinarRoutes");
 const ventureClashRoutes = require("./src/routes/ventureClashRoutes");
 
@@ -41,7 +41,7 @@ app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Register routes
 app.use("/api/auth", authRoutes);
 app.use("/api/workshop", workshopRoutes);
-app.use("/api/treasurehunt", treasureHuntRoutes);
+app.use("/api/quiz", quizRoutes);
 app.use("/api/webinar", webinarRoutes);
 app.use("/api/ventureclash", ventureClashRoutes);
 

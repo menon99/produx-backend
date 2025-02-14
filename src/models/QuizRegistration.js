@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const TreasureHuntRegistrationSchema = new mongoose.Schema({
+const QuizRegistrationSchema = new mongoose.Schema({
   teamName: { type: String, required: true, unique: true },
   leaderName: { type: String, required: true },
   leaderRegistrationNumber: { type: String, required: true },
@@ -11,7 +11,4 @@ const TreasureHuntRegistrationSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model(
-  "TreasureHuntRegistration",
-  TreasureHuntRegistrationSchema
-);
+module.exports = mongoose.model("QuizRegistration", QuizRegistrationSchema);

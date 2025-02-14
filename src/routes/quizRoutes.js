@@ -1,16 +1,15 @@
 const express = require("express");
-const {
-  registerTreasureHuntTeam,
-} = require("../controllers/treasureHuntController");
+const { registerQuizTeam } = require("../controllers/quizController");
+const { validateQuizRegistration } = require("../middleware/validateQuiz");
 const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
 /**
  * @swagger
- * /treasurehunt/register:
+ * /quiz/register:
  *   post:
- *     summary: Register a team for the Treasure Hunt
+ *     summary: Register a team for the Quiz
  *     description: Registers a team with a leader and two members.
  *     security:
  *       - BearerAuth: []
@@ -79,6 +78,6 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.post("/register", protect, registerTreasureHuntTeam);
+router.post("/register", protect, validateQuizRegistration, registerQuizTeam);
 
 module.exports = router;

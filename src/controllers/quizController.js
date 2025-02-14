@@ -1,6 +1,6 @@
-const TreasureHuntRegistration = require("../models/TreasureHuntRegistration");
+const QuizRegistration = require("../models/QuizRegistration");
 
-const registerTreasureHuntTeam = async (req, res) => {
+const registerQuizTeam = async (req, res) => {
   const {
     teamName,
     leaderName,
@@ -13,7 +13,7 @@ const registerTreasureHuntTeam = async (req, res) => {
 
   try {
     // Check if the team name is already taken
-    const existingTeam = await TreasureHuntRegistration.findOne({ teamName });
+    const existingTeam = await QuizRegistration.findOne({ teamName });
     if (existingTeam) {
       return res.status(400).json({
         code: "TEAM_NAME_TAKEN",
@@ -22,7 +22,7 @@ const registerTreasureHuntTeam = async (req, res) => {
     }
 
     // Register the new team
-    const newTeam = new TreasureHuntRegistration({
+    const newTeam = new QuizRegistration({
       leaderName,
       leaderRegistrationNumber,
       leaderOfficialMail,
@@ -36,7 +36,7 @@ const registerTreasureHuntTeam = async (req, res) => {
 
     return res.status(201).json({
       code: "REGISTRATION_SUCCESS",
-      message: "Team successfully registered for the Treasure Hunt!",
+      message: "Team successfully registered for the Quiz!",
     });
   } catch (error) {
     console.log(req.body);
@@ -48,4 +48,4 @@ const registerTreasureHuntTeam = async (req, res) => {
   }
 };
 
-module.exports = { registerTreasureHuntTeam };
+module.exports = { registerQuizTeam };
