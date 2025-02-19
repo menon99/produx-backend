@@ -22,7 +22,7 @@ const registerQuizTeam = async (req, res) => {
     }
 
     // Register the new team
-    const newTeam = new QuizRegistration({
+    const registrationData = {
       leaderName,
       leaderRegistrationNumber,
       leaderOfficialMail,
@@ -30,7 +30,13 @@ const registerQuizTeam = async (req, res) => {
       member3Name,
       member4Name,
       teamName,
+    };
+
+    Object.keys(registrationData).forEach((key) => {
+      if (!registrationData[key]) delete registrationData[key];
     });
+
+    const newTeam = new QuizRegistration(registrationData);
 
     await newTeam.save();
 

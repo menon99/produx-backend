@@ -23,8 +23,8 @@ const quizSchema = Joi.object({
       "string.empty": "Email is required",
     }),
   member2Name: Joi.string().trim().min(2).max(100).required(),
-  member3Name: Joi.string().trim().min(2).max(100).required(),
-  member4Name: Joi.string().trim().min(2).max(100).required(),
+  member3Name: Joi.string().trim().min(2).max(100),
+  member4Name: Joi.string().trim().min(2).max(100),
 });
 
 module.exports = quizSchema;

@@ -6,8 +6,8 @@ const QuizRegistrationSchema = new mongoose.Schema({
   leaderRegistrationNumber: { type: String, required: true },
   leaderOfficialMail: { type: String, required: true },
   member2Name: { type: String, required: true },
-  member3Name: { type: String, required: true },
-  member4Name: { type: String, required: true },
+  member3Name: { type: String, required: false },
+  member4Name: { type: String, required: false },
   createdAt: { type: Date, default: Date.now },
 });
 
