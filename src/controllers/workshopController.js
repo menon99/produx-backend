@@ -3,7 +3,7 @@ const Student = require("../models/Student");
 
 const SEAT_LIMITS = {
   google_analytics: 50,
-  figma: 50,
+  figma: 80,
 };
 
 const registerForWorkshop = async (req, res) => {
